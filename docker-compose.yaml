@@ -1,0 +1,61 @@
+version: '3.8'
+
+networks:
+  mongo-network:
+    driver: bridge
+
+services:
+  mongo:
+    image: mongo:7.0
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: aa1234
+    networks:
+      - mongo-network
+
+  mongoexpress:
+    image: mongo-express
+    container_name: mongoexpress
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: aa1234
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: aa1234
+      ME_CONFIG_MONGODB_SERVER: mongo
+    networks:
+      - mongo-network
+    depends_on:
+      - mongo
+
+  backend:
+    build: ./backend
+    container_name: app-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGO_URI=mongodb://admin:aa1234@mongo:27017/mydatabase?authSource=admin
+    networks:
+      - mongo-network
+    depends_on:
+      - mongo
+  frontend:
+    build: ./frontend
+    container_name: app-frontend
+    ports:
+      - "3001:3001"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3001
+      - REACT_APP_API_URL=http://localhost:3000 # Make sure this points to 3000!
+      - WATCHPACK_POLLING=true
+    stdin_open: true
+    tty: true
+    networks:
+      - mongo-network
+    depends_on:
+      - backend
