@@ -1,13 +1,37 @@
+.InputContainer {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+}
+
 .Input {
-  border-radius: 5px;
-  border: 2px solid transparent;
-  font-size: inherit;
+  border-radius: 12px;
+  border: 2px solid #e0e0e0;
+  font-size: 16px;
   outline: none;
-  padding: 10px;
-  transition: border .2s;
-  width: 100%;
+  padding: 12px 20px;
+  width: 300px;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  color: #333;
 }
 
 .Input:focus {
-  border: 2px solid #1897f9;
+  border-color: #1897f9;
+  box-shadow: 0 0 0 4px rgba(24, 151, 249, 0.15);
+  transform: translateY(-2px);
+}
+
+.Input::placeholder {
+  color: #888;
+  font-size: 14px;
+}
+
+.HelpText {
+  margin-top: 8px;
+  color: #28a745;
+  font-weight: 500;
+  font-size: 14px;
 }

@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import UserList from './components/UserList';
 import { useState , useEffect} from 'react';
@@ -9,10 +8,9 @@ function App() {
     const usersEndpoint = "/users";
 
   const [users, setUsers] = useState([]);
-  const [error, setError] = useState();
+  const [success, setSuccess] = useState("");
 
-
- const fetchUsers = async () => {
+  const fetchUsers = async () => {
     try {
       const { data } = await api.get(usersEndpoint);
       setUsers(data);
@@ -39,6 +37,7 @@ function App() {
       const { data } = await api.post(usersEndpoint, newUser);
 
       setUsers([...users, data]);
+      setSuccess("excellent work!");
     } catch (err) {
       console.log(err)
       setError("Could not add user!");
@@ -49,7 +48,13 @@ function App() {
   }, []);
   return (
     <div className="App">
+      <h1>User Management App</h1>
       <UserForm onAddUser={handleAddUser} />
+      {success && (
+        <p role="alert" className="Success">
+          {success}
+        </p>
+      )}
       {error && (
         <p role="alert" className="Error">
           {error}

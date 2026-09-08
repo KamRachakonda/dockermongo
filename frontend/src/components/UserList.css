@@ -1,4 +1,42 @@
 .MovieList {
   list-style: none;
-  padding-left: 0;
+  padding: 0;
+  margin: 2rem 0;
+  width: 100%;
+  max-width: 600px;
+}
+
+.MovieListItem {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 15px 20px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.MovieListItem:hover {
+  transform: translateY(-2px);
+}
+
+.MovieListItem__Delete {
+  background: none;
+  border: none;
+  color: #ff6b6b;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 5px;
+}
+
+.MovieListItem__Delete:hover {
+  color: #ff5252;
+}
+
+.user-name {
+  font-weight: 500;
+  color: #fff;
 }

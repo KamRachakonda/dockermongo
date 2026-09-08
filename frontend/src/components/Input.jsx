@@ -3,14 +3,16 @@ import "./Input.css";
 
 function Input({ onChange, placeholder, value, ...props }) {
   return (
-    <input
-      onChange={onChange}
-      className="Input"
-      placeholder={placeholder}
-      type="text"
-      value={value}
-      {...props}
-    />
+    <div className="InputContainer">
+      <input
+        onChange={onChange}
+        className="Input"
+        placeholder={placeholder}
+        type="text"
+        value={value}
+        {...props}
+      />
+    </div>
   );
 }
 

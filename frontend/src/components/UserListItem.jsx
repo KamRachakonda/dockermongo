@@ -4,7 +4,7 @@ import "./UserListItem.css";
 function User({ user, onDeleteUser }) {
   return (
     <li className="MovieListItem">
-      {user.name}
+      <span className="user-name">{user.name}</span>
       <button className="MovieListItem__Delete" onClick={onDeleteUser}>
         <img src="/images/delete.svg" alt="Delete user" />
       </button>
